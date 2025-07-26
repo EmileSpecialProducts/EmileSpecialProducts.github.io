@@ -346,8 +346,21 @@ function createTree(element, editor) {
       switch (ext) {
         case "png":
         case "jpg":
+        case "jpeg":
+        case "jpe":
+        case "jif":
+        case "jfif":  
         case "gif":
         case "ico":
+        case "bmp":
+        case "apng":
+        case "avif":
+        case "svg":
+        case "tif":
+        case "tiff":
+        case "webp":
+        case "xbm":
+                
           return true;
       }
     }
