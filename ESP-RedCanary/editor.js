@@ -165,7 +165,12 @@ function createTree(element, editor) {
   document.getElementById(element).appendChild(treeRoot);
 
   function loadDownload(path) {
-    document.getElementById('download-frame').src = path + "?download=true";
+    //document.getElementById('download-frame').src = path + "?download=true";
+    //document.getElementById('download-frame').setAttribute('download', path);
+    //document.getElementById('download-frame').src = path;
+    //document.getElementById("editor").style.display = "none";
+    //preview.style.display = "block";
+    //preview.innerHTML = '<img src="' + path + '" style="max-width:100%; max-height:100%; margin:auto; display:block;" />';
   }
 
   function loadPreview(path) {
@@ -248,9 +253,10 @@ function createTree(element, editor) {
     }
     var download = document.createElement("li");
     list.appendChild(download);
-    download.innerHTML = "<span>Download</span>";
+//    download.innerHTML = "<span>Download</span>";
+    download.innerHTML = "<span><a href='"+path+"' download>Download</a></span>";
     download.onclick = function (e) {
-      loadDownload(path);
+      //loadDownload(path);
       if (document.body.getElementsByClassName('contextMenu').length > 0) document.body.removeChild(el);
     };
     var delFile = document.createElement("li");
@@ -366,26 +372,62 @@ function createTree(element, editor) {
         case "html":
         case "js":
         case "json":
-        case "c":
-        case "h":
-        case "cpp":
         case "css":
         case "xml":
+        case "csv":
+        case "md":
+        case "markdown":
+        case "log":
+        case "ini":
+        case "conf":
+        case "cfg":
+        case "h":
+        case "cpp":
+        case "c":
+        case "hpp":
+        case "py":
+        case "yml":
+        case "yaml":
+        case "sh":
+        case "bat":
+        case "ps1":
+        case "env":
+        case "sql":
+        case "lua":
+        case "php":
+        case "r":
+        case "svg":
+        case "gradle":
+        case "properties":
           return true;
       }
     }
     return false;
   }
-
   function isImageFile(path) {
     var ext = /(?:\.([^.]+))?$/.exec(path)[1];
     if (typeof ext !== undefined) {
       switch (ext) {
         case "png":
         case "jpg":
+        case "jpeg":
+        case "jpe":
+        case "jif":
+        case "jfif":  
         case "gif":
         case "ico":
         case "bmp":
+        case "apng":
+        case "avif":
+        case "webp":
+        case "svg":
+        case "tiff":
+        case "tif":
+        case "heic":
+        case "heif":
+        case "avif":
+        case "jfif":
+        case "xbm":
           return true;
       }
     }
@@ -542,6 +584,8 @@ function createEditor(element, file, lang, theme, type) {
     bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
     exec: function (editor) {
       httpPost(file, editor.getValue() + "", type);
+      treeRoot.removeChild(treeRoot.childNodes[0]);
+      httpGet(treeRoot, "/");
     },
     readOnly: false
   });
