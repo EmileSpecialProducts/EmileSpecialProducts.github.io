@@ -584,8 +584,8 @@ function createEditor(element, file, lang, theme, type) {
     bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
     exec: function (editor) {
       httpPost(file, editor.getValue() + "", type);
-      treeRoot.removeChild(treeRoot.childNodes[0]);
-      httpGet(treeRoot, "/");
+      //treeRoot.removeChild(treeRoot.childNodes[0]);
+      //httpGet(treeRoot, "/");
     },
     readOnly: false
   });
